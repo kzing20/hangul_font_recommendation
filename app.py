@@ -26,8 +26,9 @@ def font_recommend():
   font_model.font_names = request.json.get('font_names', [])
   font_model.weights = request.json.get('weights', [])
 
-  if font_model.weights==1: #디폴트 값 설정
-    font_model.weights = [5] * len(font_model.font_names)
+  # if font_model.weights==1: #디폴트 값 설정
+  #   print('기존 weight',font_model.weights)
+  #   font_model.weights = [5] * len(font_model.font_names)
 
   print(font_model.font_names,font_model.weights) #확인용
 
