@@ -7,9 +7,7 @@ import math
 from scipy.spatial import distance
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-import sys
-sys.path.append("./img2vec_pytorch")  # Adds higher directory to python modules path.
-from img_to_vec import Img2Vec
+
 
 #2. 특징벡터 파일 로드
 #2-1. 형태소 특징벡터 파일 로드
