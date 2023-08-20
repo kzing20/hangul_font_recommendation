@@ -36,7 +36,6 @@ uhm_df = pd.read_csv('./특징벡터/골격/uhm2_feature_vector.csv')
 stroke_thickness_df = pd.read_csv('./특징벡터/굵기/stroke_thickness.csv')
 
 #3. 입력 폰트들의 특징벡터 csv 파일에서 읽어오기
-font_names = ['둥근모꼴'] #입력 폰트 이름(2개 이상)
 
 #3-1. 입력 폰트들의 형태소 특징벡터 읽어오기
 #font이름에 해당하는 벡터 읽어오는 함수
@@ -96,7 +95,6 @@ def make_thickness_list(font_names):
     return width_list,height_list
 
 # 4. 입력 폰트들의 특징벡터 평균내기
-weights = [1] # 입력 폰트들의 가중치
 
 # 4.1 형태소 특징벡터 가중평균
 #각 형태소 별로 특징벡터 리스트 만드는 함수
@@ -367,8 +365,7 @@ def thickness_similarity():
     return font_thickness_sim
 
 # 8. 폰트 추천 결과
-#통합모델 가중치 
-total_weights = [2,1,3] #형태소, 골격 가중치 순
+
 
 def total_model_recommend(total_weights):
     font_recommendation = pd.DataFrame()
@@ -381,7 +378,6 @@ def total_model_recommend(total_weights):
     font_recommendation['stroke'] = stroke_recommendation_sim
     font_recommendation['skel']=skel_recommendation_sim
     font_recommendation['thickness'] = font_thickness_sim
-    # font_recommendation['total'] = font_recommendation['stroke']+font_recommendation['skel'] + font_recommendation['thickness']
     font_recommendation['total'] = total_weights[0]*font_recommendation['stroke']+total_weights[1]*font_recommendation['skel']+ total_weights[2]*font_recommendation['thickness']
     font_search_rank = font_recommendation.sort_values(by='total', ascending=False)
     filtered_search_rank = font_search_rank[~font_search_rank['fontname'].isin(font_names)]
@@ -390,5 +386,9 @@ def total_model_recommend(total_weights):
     return search_rank_list
 
 
-search_rank_list = total_model_recommend(total_weights)
-print(search_rank_list)
+#통합모델 가중치 
+total_weights = [2,1,3] #형태소, 골격 가중치 순
+weights = [] # 입력 폰트들의 가중치
+font_names = [] #입력 폰트 이름(2개 이상)
+#search_rank_list = total_model_recommend(total_weights)
+#print(search_rank_list)

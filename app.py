@@ -25,7 +25,12 @@ def font_recommend():
   # POST 요청으로부터 font_names 받아오기
   font_model.font_names = request.json.get('font_names', [])
   font_model.weights = request.json.get('weights', [])
-  
+
+  if font_model.weights==1: #디폴트 값 설정
+    font_model.weights = [5] * len(font_model.font_names)
+
+  print(font_model.font_names,font_model.weights) #확인용
+
   #폰트 추천 시스템 모듈 호출
   search_rank_list = font_model.total_model_recommend(total_weights)
   print(search_rank_list) #확인용
