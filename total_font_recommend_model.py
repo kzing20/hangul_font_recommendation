@@ -385,7 +385,7 @@ def total_model_recommend(total_weights):
 
 
 #통합모델 가중치 
-total_weights = [2,1,3] #형태소, 골격 가중치 순
+total_weights = [] #형태소, 골격 가중치 순
 weights = [] # 입력 폰트들의 가중치
 font_names = [] #입력 폰트 이름(2개 이상)
 #search_rank_list = total_model_recommend(total_weights)
