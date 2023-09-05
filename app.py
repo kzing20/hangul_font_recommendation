@@ -19,8 +19,6 @@ def helloWorld():
 
 @app.route("/font_recommend_test", methods=['GET', 'POST'])
 def font_recommend():
-  #가중치 -> 나중에 사용자 입력 값으로 수정
-  total_weights = [2,1,1]
 
   # POST 요청으로부터 font_names 받아오기
   font_model.font_names = request.json.get('font_names', [])
@@ -34,7 +32,7 @@ def font_recommend():
   print(font_model.font_names,font_model.weights,font_model.total_weights) #확인용
 
   #폰트 추천 시스템 모듈 호출
-  search_rank_list = font_model.total_model_recommend(total_weights)
+  search_rank_list = font_model.total_model_recommend(font_model.total_weights)
   print(search_rank_list) #확인용
   return jsonify(search_rank_list)
 
